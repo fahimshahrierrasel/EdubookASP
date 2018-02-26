@@ -5,14 +5,15 @@
 <html>
 <head runat="server">
     <title><%: Page.Title %></title>
+    <link rel="icon" type="image/ico" href="Images/favicon.ico"/>
     <%: Styles.Render("~/bundles/styles") %>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light nav-color">
         <a href="/" class="navbar-brand">
-            <asp:Image runat="server" ImageUrl="~/Images/logo.png" height="40" alt=""/>
+            <asp:Image runat="server" ImageUrl="~/Images/logo.png" Height="40" alt="" />
         </a>
     </nav>
 
@@ -26,11 +27,13 @@
                 </asp:ContentPlaceHolder>
             </div>
         </div>
-        <hr />
-        <footer>
-            <p>&copy; <%: DateTime.Now.Year %> - Edubook A Social Network for Education</p>
-        </footer>
+
     </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <%: DateTime.Now.Year %> - Edubook A Social Network for Education</p>
+        </div>
+    </footer>
     <%: Scripts.Render("~/bundles/scripts") %>
 </body>
 </html>

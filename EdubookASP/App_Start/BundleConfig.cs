@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace EdubookASP.App_Start
 {
@@ -11,7 +7,7 @@ namespace EdubookASP.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             StyleBundle thirdPartyStyle = new StyleBundle("~/bundles/styles");
-            thirdPartyStyle.Include("~/Content/bootstrap.css", "~/Content/font-awesome.css");
+            thirdPartyStyle.Include("~/Content/bootstrap.css", "~/Content/font-awesome.css", "~/Content/site.css");
 
 
             ScriptBundle thirdPartyScripts = new ScriptBundle("~/bundles/scripts");
