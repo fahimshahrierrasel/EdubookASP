@@ -75,6 +75,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\EdubookDB.mdf" />
+    <Content Include="App_Data\EdubookDB_log.ldf">
+      <DependentUpon>EdubookDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
