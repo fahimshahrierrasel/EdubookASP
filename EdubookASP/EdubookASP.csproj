@@ -169,10 +169,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\EdubookDB.mdf" />
-    <Content Include="App_Data\EdubookDB_log.ldf">
-      <DependentUpon>EdubookDB.mdf</DependentUpon>
-    </Content>
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -246,7 +242,9 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
