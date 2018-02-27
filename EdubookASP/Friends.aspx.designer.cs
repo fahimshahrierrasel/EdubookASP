@@ -11,7 +11,7 @@ namespace EdubookASP
 {
 
 
-    public partial class Profile1
+    public partial class Friends
     {
     }
 }

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace EdubookASP
 {
-    public partial class Profile1 : System.Web.UI.Page
+    public partial class Friends : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Edubook" Class="EdubookDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=tcp:fahimlict.database.windows.net,1433;Initial Catalog=Edubook;Persist Security Info=False;User ID=fahimshahrierrasel;MultipleActiveResultSets=False;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="EdubookConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Comment" Member="Comments">
+    <Type Name="Comment">
+      <Column Name="CmtId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CmtText" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Profile_ProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Post_PostId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Post_Comment" Member="Post" ThisKey="Post_PostId" OtherKey="PostId" Type="Post" IsForeignKey="true" />
+      <Association Name="Profile_Comment" Member="Profile" ThisKey="Profile_ProfileId" OtherKey="ProfileId" Type="Profile" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ValidAnswer" Member="ValidAnswers">
+    <Type Name="ValidAnswer">
+      <Column Name="ValidAnswerId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AnsOptNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AnswerText" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="Question_QuestionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Question_ValidAnswer" Member="Question" ThisKey="Question_QuestionId" OtherKey="QuestionId" Type="Question" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Exam" Member="Exams">
+    <Type Name="Exam">
+      <Column Name="ExamId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExamDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ExamName" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Profile_ProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Exam_ExamScore" Member="ExamScores" ThisKey="ExamId" OtherKey="Exam_ExamId" Type="ExamScore" />
+      <Association Name="Exam_Question" Member="Questions" ThisKey="ExamId" OtherKey="Exam_ExamId" Type="Question" />
+      <Association Name="Exam_UserAnswer" Member="UserAnswers" ThisKey="ExamId" OtherKey="Exam_ExamId" Type="UserAnswer" />
+      <Association Name="Profile_Exam" Member="Profile" ThisKey="Profile_ProfileId" OtherKey="ProfileId" Type="Profile" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExamScore" Member="ExamScores">
+    <Type Name="ExamScore">
+      <Column Name="ExamScoreId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Correct" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Wrong" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Profile_ProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Exam_ExamId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Exam_ExamScore" Member="Exam" ThisKey="Exam_ExamId" OtherKey="ExamId" Type="Exam" IsForeignKey="true" />
+      <Association Name="Profile_ExamScore" Member="Profile" ThisKey="Profile_ProfileId" OtherKey="ProfileId" Type="Profile" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Friend" Member="Friends">
+    <Type Name="Friend">
+      <Column Name="Profile_FriendId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="User_UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Profile_Friend" Member="Profile" ThisKey="Profile_FriendId" OtherKey="ProfileId" Type="Profile" IsForeignKey="true" />
+      <Association Name="User_Friend" Member="User" ThisKey="User_UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Post" Member="Posts">
+    <Type Name="Post">
+      <Column Name="PostId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PostText" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Likes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Tags" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Profile_ProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Post_Comment" Member="Comments" ThisKey="PostId" OtherKey="Post_PostId" Type="Comment" />
+      <Association Name="Profile_Post" Member="Profile" ThisKey="Profile_ProfileId" OtherKey="ProfileId" Type="Profile" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Profile" Member="Profiles">
+    <Type Name="Profile">
+      <Column Name="ProfileId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BirthDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Education" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Institution" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Rating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FavTag" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="About" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PhotoUrl" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="User_UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Profile_Comment" Member="Comments" ThisKey="ProfileId" OtherKey="Profile_ProfileId" Type="Comment" />
+      <Association Name="Profile_Exam" Member="Exams" ThisKey="ProfileId" OtherKey="Profile_ProfileId" Type="Exam" />
+      <Association Name="Profile_ExamScore" Member="ExamScores" ThisKey="ProfileId" OtherKey="Profile_ProfileId" Type="ExamScore" />
+      <Association Name="Profile_Friend" Member="Friend" ThisKey="ProfileId" OtherKey="Profile_FriendId" Type="Friend" Cardinality="One" />
+      <Association Name="Profile_Post" Member="Posts" ThisKey="ProfileId" OtherKey="Profile_ProfileId" Type="Post" />
+      <Association Name="Profile_UserAnswer" Member="UserAnswers" ThisKey="ProfileId" OtherKey="Profile_ProfileId" Type="UserAnswer" />
+      <Association Name="User_Profile" Member="User" ThisKey="User_UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Question" Member="Questions">
+    <Type Name="Question">
+      <Column Name="QuestionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="QuesText" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Exam_ExamId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Question_ValidAnswer" Member="ValidAnswers" ThisKey="QuestionId" OtherKey="Question_QuestionId" Type="ValidAnswer" />
+      <Association Name="Question_QuestionOption" Member="QuestionOptions" ThisKey="QuestionId" OtherKey="Question_QuestionId" Type="QuestionOption" />
+      <Association Name="Question_UserAnswer" Member="UserAnswers" ThisKey="QuestionId" OtherKey="Question_QuestionId" Type="UserAnswer" />
+      <Association Name="Exam_Question" Member="Exam" ThisKey="Exam_ExamId" OtherKey="ExamId" Type="Exam" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuestionOption" Member="QuestionOptions">
+    <Type Name="QuestionOption">
+      <Column Name="OptionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OptNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OptText" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="Question_QuestionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Question_QuestionOption" Member="Question" ThisKey="Question_QuestionId" OtherKey="QuestionId" Type="Question" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="RegDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="User_Friend" Member="Friends" ThisKey="UserId" OtherKey="User_UserId" Type="Friend" />
+      <Association Name="User_Profile" Member="Profiles" ThisKey="UserId" OtherKey="User_UserId" Type="Profile" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserAnswers" Member="UserAnswers">
+    <Type Name="UserAnswer">
+      <Column Name="UserAnswerNo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Exam_ExamId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Question_QuestionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AnsOptNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Profile_ProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Exam_UserAnswer" Member="Exam" ThisKey="Exam_ExamId" OtherKey="ExamId" Type="Exam" IsForeignKey="true" />
+      <Association Name="Profile_UserAnswer" Member="Profile" ThisKey="Profile_ProfileId" OtherKey="ProfileId" Type="Profile" IsForeignKey="true" />
+      <Association Name="Question_UserAnswer" Member="Question" ThisKey="Question_QuestionId" OtherKey="QuestionId" Type="Question" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
