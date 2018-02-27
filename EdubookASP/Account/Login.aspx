@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="card">
+    <div class="card mr-3">
         <div class="card-body">
             <form id="signin" class="form-signin" runat="server">
                 <div class="text-center mb-4">
