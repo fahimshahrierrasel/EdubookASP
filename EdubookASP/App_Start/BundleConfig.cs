@@ -13,6 +13,7 @@ namespace EdubookASP.App_Start
             ScriptBundle thirdPartyScripts = new ScriptBundle("~/bundles/scripts");
             thirdPartyScripts.Include("~/Scripts/jquery-3.3.1.js",
                 "~/Scripts/bootstrap.js",
+                "~/Scripts/jquery.validate.js",
                 "~/Scripts/modernizer-3.4.0.js");
 
             bundles.Add(thirdPartyStyle);
