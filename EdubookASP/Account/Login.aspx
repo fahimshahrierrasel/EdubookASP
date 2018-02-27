@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="card">
         <div class="card-body">
-            <form class="form-signin" runat="server">
+            <form id="signin" class="form-signin" runat="server">
                 <div class="text-center mb-4">
                     <asp:Image runat="server" CssClass="mb-4" ImageUrl="~/Images/logo.png" AlternateText="Edubook" />
                 </div>
@@ -29,8 +29,38 @@
                     <br />
                     <a href="Register">Not have an account</a>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <asp:Button CssClass="btn btn-lg btn-primary btn-block" runat="server" Text="Sign in" />
             </form>
         </div>
     </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
+    <%:Scripts.Render("~/bundles/validation") %>
+    <script>
+        jQuery(document).ready(function () {
+            $('#signin').validate({
+                rules: {
+                    <%=InputEmail.UniqueID%>: {
+                        required: true,
+                        email: true
+                    },
+                    <%=InputPassword.UniqueID%>: {
+                        required: true
+                    }
+                },
+                errorElement: "div",
+                errorPlacement: function (error, element) {
+                    // Add the `help-block` class to the error element
+                    error.addClass("invalid-feedback");
+                    error.insertAfter(element);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                }
+            });
+        });
+    </script>
 </asp:Content>

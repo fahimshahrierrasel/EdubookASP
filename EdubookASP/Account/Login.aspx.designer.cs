@@ -13,6 +13,15 @@ namespace EdubookASP.Account {
     public partial class Login {
         
         /// <summary>
+        /// signin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm signin;
+        
+        /// <summary>
         /// InputEmail control.
         /// </summary>
         /// <remarks>
