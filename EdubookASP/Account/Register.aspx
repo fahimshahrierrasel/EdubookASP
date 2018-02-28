@@ -29,7 +29,20 @@
                     <label for="InputConfPassword">Confirm Password</label>
                     <asp:TextBox ID="InputConfPassword" runat="server" CssClass="form-control" placeholder="Confirm Password" TextMode="Password"></asp:TextBox>
                 </div>
-                <asp:Button CssClass="btn btn-lg btn-primary btn-block" runat="server" Text="Register" />
+                <asp:Panel ID="SuccessPanel" CssClass="alert alert-success alert-dismissible fade show" Visible="false" runat="server">
+                    <strong>Registration Complete!!</strong><br />
+                    <a href="~/Account/Login" runat="server">Go to Login</a>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </asp:Panel>
+                <asp:Panel ID="WarningPanel" CssClass="alert alert-warning alert-dismissible fade show" Visible="false" runat="server">
+                    <asp:Label ID="WaringLabel" runat="server" Text="Label"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </asp:Panel>
+                <asp:Button ID="RegisterButton" CssClass="btn btn-lg btn-primary btn-block" runat="server" Text="Register" OnClick="RegisterButton_Click" />
             </form>
         </div>
     </div>
@@ -42,8 +55,9 @@
                 rules: {
                     <%=InputUsername.UniqueID%>:
                     {
-                        required: true
-                    },
+                    required: true,
+                    minlength: 5
+                },
                     <%=InputEmail.UniqueID%>: {
                         required: true,
                         email: true

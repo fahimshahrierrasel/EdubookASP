@@ -110,7 +110,7 @@
       <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Username" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="PasswordHash" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="RegDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Association Name="User_Friend" Member="Friends" ThisKey="UserId" OtherKey="User_UserId" Type="Friend" />
       <Association Name="User_Profile" Member="Profiles" ThisKey="UserId" OtherKey="User_UserId" Type="Profile" />

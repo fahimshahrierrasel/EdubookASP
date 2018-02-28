@@ -2454,7 +2454,7 @@ namespace EdubookASP
 		
 		private string _Email;
 		
-		private string _PasswordHash;
+		private string _Password;
 		
 		private System.DateTime _RegDate;
 		
@@ -2472,8 +2472,8 @@ namespace EdubookASP
     partial void OnUsernameChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
-    partial void OnPasswordHashChanging(string value);
-    partial void OnPasswordHashChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
     partial void OnRegDateChanging(System.DateTime value);
     partial void OnRegDateChanged();
     #endregion
@@ -2545,22 +2545,22 @@ namespace EdubookASP
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string PasswordHash
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Password
 		{
 			get
 			{
-				return this._PasswordHash;
+				return this._Password;
 			}
 			set
 			{
-				if ((this._PasswordHash != value))
+				if ((this._Password != value))
 				{
-					this.OnPasswordHashChanging(value);
+					this.OnPasswordChanging(value);
 					this.SendPropertyChanging();
-					this._PasswordHash = value;
-					this.SendPropertyChanged("PasswordHash");
-					this.OnPasswordHashChanged();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
 				}
 			}
 		}
