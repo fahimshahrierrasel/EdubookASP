@@ -13,5 +13,10 @@ namespace EdubookASP
         {
 
         }
+
+        protected void TweetSubmitButton_Click(object sender, EventArgs e)
+        {
+            string tweet = TextBoxTweet.Text;
+        }
     }
 }

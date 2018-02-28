@@ -15,9 +15,17 @@ namespace EdubookASP.App_Start
             ScriptBundle thirdPartyScripts = new ScriptBundle("~/bundles/scripts");
             thirdPartyScripts.Include("~/Scripts/jquery-3.3.1.js", "~/Scripts/bootstrap.js", "~/Scripts/modernizer-3.4.0.js");
 
+            StyleBundle simpleMdeStyle = new StyleBundle("~/bundles/mdestyle");
+            simpleMdeStyle.Include("~/Content/simplemde.min.css");
+
+            ScriptBundle simpleMdeScripts = new ScriptBundle("~/bundles/mdescript");
+            simpleMdeScripts.Include("~/Scripts/simplemde.min.js");
+
             bundles.Add(thirdPartyStyle);
+            bundles.Add(simpleMdeStyle);
             bundles.Add(validationBundle);
             bundles.Add(thirdPartyScripts);
+            bundles.Add(simpleMdeScripts);
             BundleTable.EnableOptimizations = true;
         }
     }

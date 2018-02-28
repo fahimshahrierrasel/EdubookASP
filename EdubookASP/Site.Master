@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="col-md-8 mt-5">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
         </div>
@@ -88,5 +88,7 @@
         </div>
     </footer>
     <%: Scripts.Render("~/bundles/scripts") %>
+    <asp:ContentPlaceHolder ID="ScriptArea" runat="server">
+    </asp:ContentPlaceHolder>
 </body>
 </html>

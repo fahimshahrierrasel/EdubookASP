@@ -1,14 +1,15 @@
 ﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EdubookASP.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <%: Styles.Render("~/bundles/mdestyle") %>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row mb-3">
-        <form class="col-md-12">
+        <form class="col-md-12" runat="server" id="FormTweet">
             <div class="form-group">
-                <textarea class="form-control" style="min-width: 100%" id="tweet" rows="3" placeholder="Write Something..."></textarea>
+                <asp:TextBox ID="TextBoxTweet" TextMode="MultiLine" CssClass="form-control" style="min-width: 100%" runat="server"></asp:TextBox>
             </div>
-            <button type="submit" class="btn btn-primary rounded float-right">Submit</button>
+            <asp:Button ID="TweetSubmitButton" CssClass="btn btn-primary rounded float-right" runat="server" Text="Fly" OnClick="TweetSubmitButton_Click"/>
         </form>
     </div>
     <div class="row">
@@ -31,4 +32,13 @@
             </div>
         </div>
     </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ScriptArea" runat="server">
+    <%: Scripts.Render("~/bundles/mdescript") %>
+    <script>
+        new SimpleMDE({
+            element: document.getElementById("<%=TextBoxTweet.ClientID%>"),
+            spellChecker: false,
+        });
+    </script>
 </asp:Content>
