@@ -29,7 +29,13 @@
                     <br />
                     <a href="Register">Not have an account</a>
                 </div>
-                <asp:Button CssClass="btn btn-lg btn-primary btn-block" runat="server" Text="Sign in" />
+                <asp:Panel ID="WarningPanel" CssClass="alert alert-warning alert-dismissible fade show" Visible="false" runat="server">
+                    <asp:Label ID="WaringLabel" runat="server" Text="Label"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </asp:Panel>
+                <asp:Button ID="LoginButton" CssClass="btn btn-lg btn-primary btn-block" runat="server" Text="Sign in" OnClick="LoginButton_Click"/>
             </form>
         </div>
     </div>

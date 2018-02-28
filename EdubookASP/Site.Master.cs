@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EdubookASP
 {
@@ -11,7 +6,10 @@ namespace EdubookASP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UserId"] == null && Session["Username"] == null && Session["Email"] == null)
+            {
+                Response.Redirect("~/Account/Login");
+            }
         }
     }
 }
