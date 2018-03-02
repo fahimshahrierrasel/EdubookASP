@@ -1698,7 +1698,7 @@ namespace EdubookASP
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Profile", Storage="_User", ThisKey="User_UserId", OtherKey="UserId", IsForeignKey=true)]
-		public User User
+		public User MyUser
 		{
 			get
 			{
@@ -2426,13 +2426,13 @@ namespace EdubookASP
 		private void attach_Profiles(Profile entity)
 		{
 			this.SendPropertyChanging();
-			entity.User = this;
+			entity.MyUser = this;
 		}
 		
 		private void detach_Profiles(Profile entity)
 		{
 			this.SendPropertyChanging();
-			entity.User = null;
+			entity.MyUser = null;
 		}
 	}
 	

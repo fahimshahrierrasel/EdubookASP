@@ -24,11 +24,20 @@
             <ul class="navbar-nav mr-auto">
             </ul>
             <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Account</a>
+                        <a class="dropdown-item btn" onclick="window.location.href='/Account/Logout';">Log out</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a href="~/Friends" runat="server" class="nav-link">Friends</a>
                 </li>
                 <li class="nav-item">
-                    <a href="~/Profile" runat="server" class="nav-link">Profile</a>
+                    <a href="~/ProfilePage" runat="server" class="nav-link">Profile</a>
                 </li>
             </ul>
         </div>
@@ -37,12 +46,13 @@
     <div class="container-fluid body-content">
         <div class="row mt-2">
             <div class="col-md-4">
-                <img src="http://via.placeholder.com/200x200" alt="..." class="img-thumbnail">
-                <h2>Md. Fahim Shahrier Rasel</h2>
+                <%--<img src="http://via.placeholder.com/200x200" alt="..." class="img-thumbnail">--%>
+                <asp:Image runat="server" ID="UserImage" CssClass="img-thumbnail" ImageUrl="http://via.placeholder.com/200x200" onerror="this.onerror=null; this.src='http://via.placeholder.com/200x200';" />
+                <h2>
+                    <asp:Label ID="LabelUserName" runat="server" Text="Name"></asp:Label>
+                </h2>
                 <p>
-                    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                    enables a clean separation of concerns and gives you full control over markup
-                    for enjoyable, agile development.
+                    <asp:Label ID="LabelAbout" runat="server" Text="About"></asp:Label>
                 </p>
                 <hr />
                 <h4>Friends</h4>
