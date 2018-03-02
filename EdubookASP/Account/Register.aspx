@@ -7,24 +7,41 @@
     <div class="card mr-3">
         <div class="card-body">
             <form id="registerform" class="form-signin" runat="server">
-                <div class="text-center mb-4">
+                <div class="text-center">
                     <asp:Image runat="server" CssClass="mb-4" ImageUrl="~/Images/logo.png" AlternateText="Edubook" />
+                </div>
+                <div class="form-row">
+                    <div class="form-label-group col">
+                        <label for="InputFirstName">First Name</label>
+                        <asp:TextBox ID="InputFirstName" runat="server" CssClass="form-control" placeholder="First Name"></asp:TextBox>
+                    </div>
+                    <div class="form-label-group col">
+                        <label for="InputLastName">Last Name</label>
+                        <asp:TextBox ID="InputLastName" runat="server" CssClass="form-control" placeholder="Last Name"></asp:TextBox>
+                    </div>
                 </div>
                 <div class="form-label-group">
                     <label for="InputUsername">Username</label>
                     <asp:TextBox ID="InputUsername" runat="server" CssClass="form-control" placeholder="Username"></asp:TextBox>
                 </div>
-
                 <div class="form-label-group">
                     <label for="InputEmail">Email address</label>
                     <asp:TextBox ID="InputEmail" runat="server" CssClass="form-control" placeholder="Email address" TextMode="Email"></asp:TextBox>
                 </div>
-
+                <div class="form-row">
+                    <div class="form-label-group col">
+                        <label for="InputDOB">Date of Birth</label>
+                        <asp:TextBox ID="InputDOB" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                    </div>
+                    <div class="form-label-group col">
+                        <label for="InputCity">City</label>
+                        <asp:TextBox ID="InputCity" runat="server" CssClass="form-control" placeholder="City"></asp:TextBox>
+                    </div>
+                </div>
                 <div class="form-label-group">
                     <label for="InputPassword">Password</label>
                     <asp:TextBox ID="InputPassword" runat="server" CssClass="form-control" placeholder="Password" TextMode="Password"></asp:TextBox>
                 </div>
-
                 <div class="form-label-group mb-3">
                     <label for="InputConfPassword">Confirm Password</label>
                     <asp:TextBox ID="InputConfPassword" runat="server" CssClass="form-control" placeholder="Confirm Password" TextMode="Password"></asp:TextBox>
@@ -61,6 +78,19 @@
                     <%=InputEmail.UniqueID%>: {
                         required: true,
                         email: true
+                    },
+                    <%=InputFirstName.UniqueID%>:{
+                        required: true
+                    },
+                    <%=InputLastName.UniqueID%>:{
+                        required: true
+                    },
+                    <%=InputCity.UniqueID%>:{
+                        required: true
+                    },
+                    <%=InputDOB.UniqueID%>:{
+                        required: true,
+                        date: true
                     },
                     <%=InputPassword.UniqueID%>: {
                         required: true,

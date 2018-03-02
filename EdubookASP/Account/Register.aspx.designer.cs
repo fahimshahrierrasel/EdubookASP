@@ -22,6 +22,24 @@ namespace EdubookASP.Account {
         protected global::System.Web.UI.HtmlControls.HtmlForm registerform;
         
         /// <summary>
+        /// InputFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox InputFirstName;
+        
+        /// <summary>
+        /// InputLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox InputLastName;
+        
+        /// <summary>
         /// InputUsername control.
         /// </summary>
         /// <remarks>
@@ -38,6 +56,24 @@ namespace EdubookASP.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox InputEmail;
+        
+        /// <summary>
+        /// InputDOB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox InputDOB;
+        
+        /// <summary>
+        /// InputCity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox InputCity;
         
         /// <summary>
         /// InputPassword control.

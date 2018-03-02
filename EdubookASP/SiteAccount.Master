@@ -19,10 +19,10 @@
 
     <div class="container-fluid body-content">
         <div class="row mt-2">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <img src="http://via.placeholder.com/640x480" />
             </div>
-            <div class="col-md-4 mt-5">
+            <div class="col-md-5 mt-2">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
             </div>

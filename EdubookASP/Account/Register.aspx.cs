@@ -16,6 +16,10 @@ namespace EdubookASP.Account
         }
         protected void RegisterButton_Click(object sender, EventArgs e)
         {
+            string firstName = InputFirstName.Text;
+            string lastName = InputLastName.Text;
+            string city = InputCity.Text;
+            string dob = InputDOB.Text;
             string username = InputUsername.Text;
             string email = InputEmail.Text;
             string password = InputPassword.Text;
@@ -24,14 +28,18 @@ namespace EdubookASP.Account
             {
                 try
                 {
-                    dbContext.Users.InsertOnSubmit(new User
-                    {
-                        Username = username,
-                        Email = email,
-                        Password = PasswordHasher.Hash(password),
-                        RegDate = DateTime.Now.Date
-                    });
+                    dbContext.InsertNewUser(
+                        username: username,
+                        email: email,
+                        passHash: PasswordHasher.Hash(password),
+                        firstName: firstName,
+                        lastName: lastName,
+                        birthDate: DateTime.Parse(dob).Date,
+                        city: city
+                    );
+
                     dbContext.SubmitChanges();
+
                     SuccessPanel.Visible = true;
                 }
                 catch (Exception exception)
