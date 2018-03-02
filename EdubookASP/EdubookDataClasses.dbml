@@ -6,8 +6,8 @@
       <Column Name="CmtText" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="Profile_ProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Post_PostId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Post_Comment" Member="Post" ThisKey="Post_PostId" OtherKey="PostId" Type="Post" IsForeignKey="true" />
       <Association Name="Profile_Comment" Member="Profile" ThisKey="Profile_ProfileId" OtherKey="ProfileId" Type="Profile" IsForeignKey="true" />
+      <Association Name="Post_Comment" Member="Post" ThisKey="Post_PostId" OtherKey="PostId" Type="Post" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ValidAnswer" Member="ValidAnswers">
@@ -51,17 +51,6 @@
       <Association Name="User_Friend" Member="User" ThisKey="User_UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Post" Member="Posts">
-    <Type Name="Post">
-      <Column Name="PostId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="PostText" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="Likes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Tags" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Profile_ProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Post_Comment" Member="Comments" ThisKey="PostId" OtherKey="Post_PostId" Type="Comment" />
-      <Association Name="Profile_Post" Member="Profile" ThisKey="Profile_ProfileId" OtherKey="ProfileId" Type="Profile" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Profile" Member="Profiles">
     <Type Name="Profile">
       <Column Name="ProfileId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -80,8 +69,8 @@
       <Association Name="Profile_Exam" Member="Exams" ThisKey="ProfileId" OtherKey="Profile_ProfileId" Type="Exam" />
       <Association Name="Profile_ExamScore" Member="ExamScores" ThisKey="ProfileId" OtherKey="Profile_ProfileId" Type="ExamScore" />
       <Association Name="Profile_Friend" Member="Friend" ThisKey="ProfileId" OtherKey="Profile_FriendId" Type="Friend" Cardinality="One" />
-      <Association Name="Profile_Post" Member="Posts" ThisKey="ProfileId" OtherKey="Profile_ProfileId" Type="Post" />
       <Association Name="Profile_UserAnswer" Member="UserAnswers" ThisKey="ProfileId" OtherKey="Profile_ProfileId" Type="UserAnswer" />
+      <Association Name="Profile_Post" Member="Posts" ThisKey="ProfileId" OtherKey="Profile_ProfileId" Type="Post" />
       <Association Name="User_Profile" Member="User" ThisKey="User_UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
@@ -126,6 +115,18 @@
       <Association Name="Exam_UserAnswer" Member="Exam" ThisKey="Exam_ExamId" OtherKey="ExamId" Type="Exam" IsForeignKey="true" />
       <Association Name="Profile_UserAnswer" Member="Profile" ThisKey="Profile_ProfileId" OtherKey="ProfileId" Type="Profile" IsForeignKey="true" />
       <Association Name="Question_UserAnswer" Member="Question" ThisKey="Question_QuestionId" OtherKey="QuestionId" Type="Question" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Post" Member="Posts">
+    <Type Name="Post">
+      <Column Name="PostId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PostText" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Likes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Tags" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PostDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Profile_ProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Post_Comment" Member="Comments" ThisKey="PostId" OtherKey="Post_PostId" Type="Comment" />
+      <Association Name="Profile_Post" Member="Profile" ThisKey="Profile_ProfileId" OtherKey="ProfileId" Type="Profile" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.InsertNewUser" Method="InsertNewUser">

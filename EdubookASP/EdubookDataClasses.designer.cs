@@ -45,9 +45,6 @@ namespace EdubookASP
     partial void InsertFriend(Friend instance);
     partial void UpdateFriend(Friend instance);
     partial void DeleteFriend(Friend instance);
-    partial void InsertPost(Post instance);
-    partial void UpdatePost(Post instance);
-    partial void DeletePost(Post instance);
     partial void InsertProfile(Profile instance);
     partial void UpdateProfile(Profile instance);
     partial void DeleteProfile(Profile instance);
@@ -63,6 +60,9 @@ namespace EdubookASP
     partial void InsertUserAnswer(UserAnswer instance);
     partial void UpdateUserAnswer(UserAnswer instance);
     partial void DeleteUserAnswer(UserAnswer instance);
+    partial void InsertPost(Post instance);
+    partial void UpdatePost(Post instance);
+    partial void DeletePost(Post instance);
     #endregion
 		
 		public EdubookDataClassesDataContext() : 
@@ -135,14 +135,6 @@ namespace EdubookASP
 			}
 		}
 		
-		public System.Data.Linq.Table<Post> Posts
-		{
-			get
-			{
-				return this.GetTable<Post>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Profile> Profiles
 		{
 			get
@@ -183,6 +175,14 @@ namespace EdubookASP
 			}
 		}
 		
+		public System.Data.Linq.Table<Post> Posts
+		{
+			get
+			{
+				return this.GetTable<Post>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertNewUser")]
 		public int InsertNewUser([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Username", DbType="VarChar(30)")] string username, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(100)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PassHash", DbType="VarChar(200)")] string passHash, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FirstName", DbType="VarChar(50)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastName", DbType="VarChar(50)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="BirthDate", DbType="Date")] System.Nullable<System.DateTime> birthDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="City", DbType="VarChar(50)")] string city)
 		{
@@ -205,9 +205,9 @@ namespace EdubookASP
 		
 		private int _Post_PostId;
 		
-		private EntityRef<Post> _Post;
-		
 		private EntityRef<Profile> _Profile;
+		
+		private EntityRef<Post> _Post;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -225,8 +225,8 @@ namespace EdubookASP
 		
 		public Comment()
 		{
-			this._Post = default(EntityRef<Post>);
 			this._Profile = default(EntityRef<Profile>);
+			this._Post = default(EntityRef<Post>);
 			OnCreated();
 		}
 		
@@ -318,40 +318,6 @@ namespace EdubookASP
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_Comment", Storage="_Post", ThisKey="Post_PostId", OtherKey="PostId", IsForeignKey=true)]
-		public Post Post
-		{
-			get
-			{
-				return this._Post.Entity;
-			}
-			set
-			{
-				Post previousValue = this._Post.Entity;
-				if (((previousValue != value) 
-							|| (this._Post.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Post.Entity = null;
-						previousValue.Comments.Remove(this);
-					}
-					this._Post.Entity = value;
-					if ((value != null))
-					{
-						value.Comments.Add(this);
-						this._Post_PostId = value.PostId;
-					}
-					else
-					{
-						this._Post_PostId = default(int);
-					}
-					this.SendPropertyChanged("Post");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Profile_Comment", Storage="_Profile", ThisKey="Profile_ProfileId", OtherKey="ProfileId", IsForeignKey=true)]
 		public Profile Profile
 		{
@@ -382,6 +348,40 @@ namespace EdubookASP
 						this._Profile_ProfileId = default(int);
 					}
 					this.SendPropertyChanged("Profile");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_Comment", Storage="_Post", ThisKey="Post_PostId", OtherKey="PostId", IsForeignKey=true)]
+		public Post Post
+		{
+			get
+			{
+				return this._Post.Entity;
+			}
+			set
+			{
+				Post previousValue = this._Post.Entity;
+				if (((previousValue != value) 
+							|| (this._Post.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Post.Entity = null;
+						previousValue.Comments.Remove(this);
+					}
+					this._Post.Entity = value;
+					if ((value != null))
+					{
+						value.Comments.Add(this);
+						this._Post_PostId = value.PostId;
+					}
+					else
+					{
+						this._Post_PostId = default(int);
+					}
+					this.SendPropertyChanged("Post");
 				}
 			}
 		}
@@ -1273,233 +1273,6 @@ namespace EdubookASP
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Post")]
-	public partial class Post : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _PostId;
-		
-		private string _PostText;
-		
-		private int _Likes;
-		
-		private string _Tags;
-		
-		private int _Profile_ProfileId;
-		
-		private EntitySet<Comment> _Comments;
-		
-		private EntityRef<Profile> _Profile;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnPostIdChanging(int value);
-    partial void OnPostIdChanged();
-    partial void OnPostTextChanging(string value);
-    partial void OnPostTextChanged();
-    partial void OnLikesChanging(int value);
-    partial void OnLikesChanged();
-    partial void OnTagsChanging(string value);
-    partial void OnTagsChanged();
-    partial void OnProfile_ProfileIdChanging(int value);
-    partial void OnProfile_ProfileIdChanged();
-    #endregion
-		
-		public Post()
-		{
-			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
-			this._Profile = default(EntityRef<Profile>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int PostId
-		{
-			get
-			{
-				return this._PostId;
-			}
-			set
-			{
-				if ((this._PostId != value))
-				{
-					this.OnPostIdChanging(value);
-					this.SendPropertyChanging();
-					this._PostId = value;
-					this.SendPropertyChanged("PostId");
-					this.OnPostIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostText", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string PostText
-		{
-			get
-			{
-				return this._PostText;
-			}
-			set
-			{
-				if ((this._PostText != value))
-				{
-					this.OnPostTextChanging(value);
-					this.SendPropertyChanging();
-					this._PostText = value;
-					this.SendPropertyChanged("PostText");
-					this.OnPostTextChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Likes", DbType="Int NOT NULL")]
-		public int Likes
-		{
-			get
-			{
-				return this._Likes;
-			}
-			set
-			{
-				if ((this._Likes != value))
-				{
-					this.OnLikesChanging(value);
-					this.SendPropertyChanging();
-					this._Likes = value;
-					this.SendPropertyChanged("Likes");
-					this.OnLikesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tags", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Tags
-		{
-			get
-			{
-				return this._Tags;
-			}
-			set
-			{
-				if ((this._Tags != value))
-				{
-					this.OnTagsChanging(value);
-					this.SendPropertyChanging();
-					this._Tags = value;
-					this.SendPropertyChanged("Tags");
-					this.OnTagsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Profile_ProfileId", DbType="Int NOT NULL")]
-		public int Profile_ProfileId
-		{
-			get
-			{
-				return this._Profile_ProfileId;
-			}
-			set
-			{
-				if ((this._Profile_ProfileId != value))
-				{
-					if (this._Profile.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnProfile_ProfileIdChanging(value);
-					this.SendPropertyChanging();
-					this._Profile_ProfileId = value;
-					this.SendPropertyChanged("Profile_ProfileId");
-					this.OnProfile_ProfileIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_Comment", Storage="_Comments", ThisKey="PostId", OtherKey="Post_PostId")]
-		public EntitySet<Comment> Comments
-		{
-			get
-			{
-				return this._Comments;
-			}
-			set
-			{
-				this._Comments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Profile_Post", Storage="_Profile", ThisKey="Profile_ProfileId", OtherKey="ProfileId", IsForeignKey=true)]
-		public Profile Profile
-		{
-			get
-			{
-				return this._Profile.Entity;
-			}
-			set
-			{
-				Profile previousValue = this._Profile.Entity;
-				if (((previousValue != value) 
-							|| (this._Profile.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Profile.Entity = null;
-						previousValue.Posts.Remove(this);
-					}
-					this._Profile.Entity = value;
-					if ((value != null))
-					{
-						value.Posts.Add(this);
-						this._Profile_ProfileId = value.ProfileId;
-					}
-					else
-					{
-						this._Profile_ProfileId = default(int);
-					}
-					this.SendPropertyChanged("Profile");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Comments(Comment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Post = this;
-		}
-		
-		private void detach_Comments(Comment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Post = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Profile")]
 	public partial class Profile : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1538,9 +1311,9 @@ namespace EdubookASP
 		
 		private EntityRef<Friend> _Friend;
 		
-		private EntitySet<Post> _Posts;
-		
 		private EntitySet<UserAnswer> _UserAnswers;
+		
+		private EntitySet<Post> _Posts;
 		
 		private EntityRef<User> _User;
 		
@@ -1580,8 +1353,8 @@ namespace EdubookASP
 			this._Exams = new EntitySet<Exam>(new Action<Exam>(this.attach_Exams), new Action<Exam>(this.detach_Exams));
 			this._ExamScores = new EntitySet<ExamScore>(new Action<ExamScore>(this.attach_ExamScores), new Action<ExamScore>(this.detach_ExamScores));
 			this._Friend = default(EntityRef<Friend>);
-			this._Posts = new EntitySet<Post>(new Action<Post>(this.attach_Posts), new Action<Post>(this.detach_Posts));
 			this._UserAnswers = new EntitySet<UserAnswer>(new Action<UserAnswer>(this.attach_UserAnswers), new Action<UserAnswer>(this.detach_UserAnswers));
+			this._Posts = new EntitySet<Post>(new Action<Post>(this.attach_Posts), new Action<Post>(this.detach_Posts));
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -1898,19 +1671,6 @@ namespace EdubookASP
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Profile_Post", Storage="_Posts", ThisKey="ProfileId", OtherKey="Profile_ProfileId")]
-		public EntitySet<Post> Posts
-		{
-			get
-			{
-				return this._Posts;
-			}
-			set
-			{
-				this._Posts.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Profile_UserAnswer", Storage="_UserAnswers", ThisKey="ProfileId", OtherKey="Profile_ProfileId")]
 		public EntitySet<UserAnswer> UserAnswers
 		{
@@ -1921,6 +1681,19 @@ namespace EdubookASP
 			set
 			{
 				this._UserAnswers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Profile_Post", Storage="_Posts", ThisKey="ProfileId", OtherKey="Profile_ProfileId")]
+		public EntitySet<Post> Posts
+		{
+			get
+			{
+				return this._Posts;
+			}
+			set
+			{
+				this._Posts.Assign(value);
 			}
 		}
 		
@@ -2014,18 +1787,6 @@ namespace EdubookASP
 			entity.Profile = null;
 		}
 		
-		private void attach_Posts(Post entity)
-		{
-			this.SendPropertyChanging();
-			entity.Profile = this;
-		}
-		
-		private void detach_Posts(Post entity)
-		{
-			this.SendPropertyChanging();
-			entity.Profile = null;
-		}
-		
 		private void attach_UserAnswers(UserAnswer entity)
 		{
 			this.SendPropertyChanging();
@@ -2033,6 +1794,18 @@ namespace EdubookASP
 		}
 		
 		private void detach_UserAnswers(UserAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Profile = null;
+		}
+		
+		private void attach_Posts(Post entity)
+		{
+			this.SendPropertyChanging();
+			entity.Profile = this;
+		}
+		
+		private void detach_Posts(Post entity)
 		{
 			this.SendPropertyChanging();
 			entity.Profile = null;
@@ -2941,6 +2714,257 @@ namespace EdubookASP
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Post")]
+	public partial class Post : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _PostId;
+		
+		private string _PostText;
+		
+		private int _Likes;
+		
+		private string _Tags;
+		
+		private System.DateTime _PostDateTime;
+		
+		private int _Profile_ProfileId;
+		
+		private EntitySet<Comment> _Comments;
+		
+		private EntityRef<Profile> _Profile;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPostIdChanging(int value);
+    partial void OnPostIdChanged();
+    partial void OnPostTextChanging(string value);
+    partial void OnPostTextChanged();
+    partial void OnLikesChanging(int value);
+    partial void OnLikesChanged();
+    partial void OnTagsChanging(string value);
+    partial void OnTagsChanged();
+    partial void OnPostDateTimeChanging(System.DateTime value);
+    partial void OnPostDateTimeChanged();
+    partial void OnProfile_ProfileIdChanging(int value);
+    partial void OnProfile_ProfileIdChanged();
+    #endregion
+		
+		public Post()
+		{
+			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
+			this._Profile = default(EntityRef<Profile>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int PostId
+		{
+			get
+			{
+				return this._PostId;
+			}
+			set
+			{
+				if ((this._PostId != value))
+				{
+					this.OnPostIdChanging(value);
+					this.SendPropertyChanging();
+					this._PostId = value;
+					this.SendPropertyChanged("PostId");
+					this.OnPostIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostText", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string PostText
+		{
+			get
+			{
+				return this._PostText;
+			}
+			set
+			{
+				if ((this._PostText != value))
+				{
+					this.OnPostTextChanging(value);
+					this.SendPropertyChanging();
+					this._PostText = value;
+					this.SendPropertyChanged("PostText");
+					this.OnPostTextChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Likes", DbType="Int NOT NULL")]
+		public int Likes
+		{
+			get
+			{
+				return this._Likes;
+			}
+			set
+			{
+				if ((this._Likes != value))
+				{
+					this.OnLikesChanging(value);
+					this.SendPropertyChanging();
+					this._Likes = value;
+					this.SendPropertyChanged("Likes");
+					this.OnLikesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tags", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Tags
+		{
+			get
+			{
+				return this._Tags;
+			}
+			set
+			{
+				if ((this._Tags != value))
+				{
+					this.OnTagsChanging(value);
+					this.SendPropertyChanging();
+					this._Tags = value;
+					this.SendPropertyChanged("Tags");
+					this.OnTagsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime PostDateTime
+		{
+			get
+			{
+				return this._PostDateTime;
+			}
+			set
+			{
+				if ((this._PostDateTime != value))
+				{
+					this.OnPostDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._PostDateTime = value;
+					this.SendPropertyChanged("PostDateTime");
+					this.OnPostDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Profile_ProfileId", DbType="Int NOT NULL")]
+		public int Profile_ProfileId
+		{
+			get
+			{
+				return this._Profile_ProfileId;
+			}
+			set
+			{
+				if ((this._Profile_ProfileId != value))
+				{
+					if (this._Profile.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProfile_ProfileIdChanging(value);
+					this.SendPropertyChanging();
+					this._Profile_ProfileId = value;
+					this.SendPropertyChanged("Profile_ProfileId");
+					this.OnProfile_ProfileIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_Comment", Storage="_Comments", ThisKey="PostId", OtherKey="Post_PostId")]
+		public EntitySet<Comment> Comments
+		{
+			get
+			{
+				return this._Comments;
+			}
+			set
+			{
+				this._Comments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Profile_Post", Storage="_Profile", ThisKey="Profile_ProfileId", OtherKey="ProfileId", IsForeignKey=true)]
+		public Profile Profile
+		{
+			get
+			{
+				return this._Profile.Entity;
+			}
+			set
+			{
+				Profile previousValue = this._Profile.Entity;
+				if (((previousValue != value) 
+							|| (this._Profile.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Profile.Entity = null;
+						previousValue.Posts.Remove(this);
+					}
+					this._Profile.Entity = value;
+					if ((value != null))
+					{
+						value.Posts.Add(this);
+						this._Profile_ProfileId = value.ProfileId;
+					}
+					else
+					{
+						this._Profile_ProfileId = default(int);
+					}
+					this.SendPropertyChanged("Profile");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Comments(Comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Post = this;
+		}
+		
+		private void detach_Comments(Comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Post = null;
 		}
 	}
 }

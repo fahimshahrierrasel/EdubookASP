@@ -76,13 +76,13 @@
                     <img class="img-fluid m-1" src="http://via.placeholder.com/64x64" alt="12" />
                 </div>
             </div>
-            <div class="col-md-8 mt-5">
+            <div class="col-md-8 mt-5 mb-5">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
         </div>
     </div>
-    <footer class="footer">
+    <footer class="footer mt-5">
         <div class="container">
             <p>&copy; <%: DateTime.Now.Year %> - Edubook A Social Network for Education</p>
         </div>

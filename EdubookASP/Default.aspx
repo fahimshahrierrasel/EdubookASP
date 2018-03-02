@@ -5,40 +5,64 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row mb-3">
-        <form class="col-md-12" runat="server" id="FormTweet">
+        <form class="col-md-12" runat="server" id="FormPost">
             <div class="form-group">
-                <asp:TextBox ID="TextBoxTweet" TextMode="MultiLine" CssClass="form-control" style="min-width: 100%" runat="server"></asp:TextBox>
+                <asp:TextBox ID="InputPost" TextMode="MultiLine" CssClass="form-control" Style="min-width: 100%" runat="server"></asp:TextBox>
             </div>
-            <asp:Button ID="TweetSubmitButton" CssClass="btn btn-primary rounded float-right" runat="server" Text="Fly" OnClick="TweetSubmitButton_Click"/>
+            <div class="form-group">
+                <asp:TextBox ID="InputPostTag" runat="server" CssClass="form-control" placeholder="Tags (use , to saperate)"></asp:TextBox>
+            </div>
+            <asp:Button ID="PostSubmitButton" CssClass="btn btn-primary btn-lg rounded" runat="server" Text="Fly" OnClick="PostSubmitButton_Click" />
         </form>
     </div>
     <div class="row">
-        <div class="card col-12 m-2 p-3">
-            <img class="card-img-top p-1" src="http://via.placeholder.com/350x150" alt="Card image cap">
+        <div class="card col-12 m-2">
             <div class="card-body">
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <div class="card-footer">
-                <a href="#"><i class="fas fa-thumbs-up"></i>100</a>
+                <a href="#"><i class="fa fa-thumbs-up"></i>100</a>
             </div>
         </div>
         <div class="card col-12 m-2">
-            <img class="card-img-top p-3" src="http://via.placeholder.com/350x150" alt="Card image cap">
             <div class="card-body">
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <div class="card-footer">
-                <a href="#"><i class="fas fa-thumbs-up"></i>100</a>
+                <a href="#"><i class="fa fa-thumbs-up"></i>100</a>
             </div>
         </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptArea" runat="server">
-    <%: Scripts.Render("~/bundles/mdescript") %>
+    <%:Scripts.Render("~/bundles/mdescript") %>
+    <%:Scripts.Render("~/bundles/validation") %>
     <script>
-        new SimpleMDE({
-            element: document.getElementById("<%=TextBoxTweet.ClientID%>"),
-            spellChecker: false,
+        jQuery(document).ready(function () {
+            $('#FormPost').validate({
+                rules: {
+                    <%=InputPost.UniqueID%>: {
+                    required: true
+                }
+            },
+            errorElement: "div",
+            errorPlacement: function (error, element) {
+                // Add the `help-block` class to the error element
+                error.addClass("invalid-feedback");
+                error.insertAfter(element);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass("is-invalid").removeClass("is-valid");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).addClass("is-valid").removeClass("is-invalid");
+            }
+            });
         });
+        var simpleMDE = new SimpleMDE({
+            element: document.getElementById("<%=InputPost.ClientID%>"),
+            spellChecker: false
+        });
+        simpleMDE.value("# Write Something....");
     </script>
 </asp:Content>

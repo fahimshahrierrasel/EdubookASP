@@ -13,30 +13,39 @@ namespace EdubookASP {
     public partial class Default {
         
         /// <summary>
-        /// FormTweet control.
+        /// FormPost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FormTweet;
+        protected global::System.Web.UI.HtmlControls.HtmlForm FormPost;
         
         /// <summary>
-        /// TextBoxTweet control.
+        /// InputPost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxTweet;
+        protected global::System.Web.UI.WebControls.TextBox InputPost;
         
         /// <summary>
-        /// TweetSubmitButton control.
+        /// InputPostTag control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button TweetSubmitButton;
+        protected global::System.Web.UI.WebControls.TextBox InputPostTag;
+        
+        /// <summary>
+        /// PostSubmitButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button PostSubmitButton;
     }
 }
