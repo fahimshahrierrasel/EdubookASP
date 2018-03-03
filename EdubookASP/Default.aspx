@@ -4,33 +4,35 @@
     <%: Styles.Render("~/bundles/mdestyle") %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="row mb-3">
-        <form class="col-md-12" runat="server" id="FormPost">
-            <div class="form-group">
-                <asp:TextBox ID="InputPost" TextMode="MultiLine" CssClass="form-control" Style="min-width: 100%" runat="server"></asp:TextBox>
-            </div>
-            <div class="form-group">
-                <asp:TextBox ID="InputPostTag" runat="server" CssClass="form-control" placeholder="Tags (use , to saperate)"></asp:TextBox>
-            </div>
-            <asp:Button ID="PostSubmitButton" CssClass="btn btn-primary btn-lg rounded" runat="server" Text="Fly" OnClick="PostSubmitButton_Click" />
-        </form>
-    </div>
-    <div class="row">
-        <div class="card col-12 m-2">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <div class="card-footer">
-                <a href="#"><i class="fa fa-thumbs-up"></i>100</a>
+    <div class="container">
+        <div class="row mb-3">
+            <div class="card col-md-12">
+                <div class="card-body">
+                    <form runat="server" id="FormPost">
+                        <div class="form-group">
+                            <asp:TextBox ID="InputPost" TextMode="MultiLine" CssClass="form-control" Style="min-width: 100%" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <asp:TextBox ID="InputPostTag" runat="server" CssClass="form-control" placeholder="Tags (use , to saperate)"></asp:TextBox>
+                        </div>
+                        <asp:Button ID="PostSubmitButton" CssClass="btn btn-success btn-lg float-right" runat="server" Text="Ask it?" OnClick="PostSubmitButton_Click" />
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="card col-12 m-2">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <div class="card-footer">
-                <a href="#"><i class="fa fa-thumbs-up"></i>100</a>
-            </div>
+        <div class="row">
+            <asp:Repeater ID="RepeaterPosts" runat="server">
+                <ItemTemplate>
+                    <div class="card col-12 mb-2">
+                        <div class="card-body">
+                            <%# Markdown.ToHtml(Eval("PostText").ToString()) %>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#"><i class="fa fa-thumbs-up"></i><%# Eval("Likes") %></a>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
     </div>
 </asp:Content>

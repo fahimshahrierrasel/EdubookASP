@@ -21,7 +21,11 @@ namespace EdubookASP.App_Start
             ScriptBundle simpleMdeScripts = new ScriptBundle("~/bundles/mdescript");
             simpleMdeScripts.Include("~/Scripts/simplemde.min.js");
 
+            ScriptBundle showdown = new ScriptBundle("~/bundles/showdown");
+            showdown.Include("~/Scripts/showdown.js");
+
             bundles.Add(thirdPartyStyle);
+            bundles.Add(showdown);
             bundles.Add(simpleMdeStyle);
             bundles.Add(validationBundle);
             bundles.Add(thirdPartyScripts);

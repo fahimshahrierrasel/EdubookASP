@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EdubookASP
 {
@@ -16,6 +12,7 @@ namespace EdubookASP
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            PopulatePosts();
         }
 
         protected void PostSubmitButton_Click(object sender, EventArgs e)
@@ -46,6 +43,13 @@ namespace EdubookASP
 
             dbContext.SubmitChanges();
             Response.Redirect(Request.RawUrl);
+        }
+
+        private void PopulatePosts()
+        {
+            var posts = from post in dbContext.Posts select post;
+            RepeaterPosts.DataSource = posts;
+            RepeaterPosts.DataBind();
         }
     }
 }
