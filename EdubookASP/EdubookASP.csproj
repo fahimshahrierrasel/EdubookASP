@@ -188,6 +188,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="UserDetails.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -265,6 +266,13 @@
     </Compile>
     <Compile Include="SiteAccount.Master.designer.cs">
       <DependentUpon>SiteAccount.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UserDetails.aspx.cs">
+      <DependentUpon>UserDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserDetails.aspx.designer.cs">
+      <DependentUpon>UserDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utils\PasswordHasher.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">

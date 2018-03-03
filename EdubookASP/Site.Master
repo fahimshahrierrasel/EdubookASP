@@ -34,6 +34,9 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a href="~/Search" runat="server" class="nav-link">Search</a>
+                </li>
+                <li class="nav-item">
                     <a href="~/Friends" runat="server" class="nav-link">Friends</a>
                 </li>
                 <li class="nav-item">
@@ -45,7 +48,7 @@
 
     <div class="container-fluid body-content">
         <div class="row mt-2">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <%--<img src="http://via.placeholder.com/200x200" alt="..." class="img-thumbnail">--%>
                 <asp:Image runat="server" ID="UserImage" CssClass="img-thumbnail" ImageUrl="http://via.placeholder.com/200x200" onerror="this.onerror=null; this.src='http://via.placeholder.com/200x200';" />
                 <h2>
@@ -86,7 +89,7 @@
                     <img class="img-fluid m-1" src="http://via.placeholder.com/64x64" alt="12" />
                 </div>
             </div>
-            <div class="col-md-8 mt-5 mb-5">
+            <div class="col-md-9 mt-5 mb-5">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
