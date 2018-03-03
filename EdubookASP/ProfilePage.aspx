@@ -38,7 +38,11 @@
                     <label for="InputAbout" class="col-sm-3">About</label>
                     <asp:TextBox ID="InputAbout" ReadOnly="true" runat="server" CssClass="form-control col-sm-9" placeholder="About you"></asp:TextBox>
                 </div>
-                
+                <div class="form-label-group m-1 row">
+                    <label for="ProfileImageUpload" class="col-sm-3">ProfileImage</label>
+                    <asp:FileUpload ID="ProfileImageUpload" runat="server" CssClass="form-control-file col-sm-9" />
+                </div>
+                <asp:Button ID="UploadImage" CssClass="btn btn-lg btn-primary float-right mt-3" runat="server" Text="Upload Image" OnClick="UploadImage_Click"/>
                 <asp:Button ID="UpdateButton" CssClass="btn btn-lg btn-primary float-right d-none mt-3" runat="server" Text="Update" OnClick="UpdateButton_Click"/>
             </form>
         </div>
@@ -54,6 +58,7 @@
             $(".form-control").removeAttr('readonly');
             $("#edit_profile").addClass('d-none');
             $('#<%=UpdateButton.ClientID%>').removeClass('d-none');
+            $('#<%=UploadImage.ClientID%>').addClass('d-none');
             $('#cancel_edit').removeClass('d-none');
         });
 
@@ -62,6 +67,7 @@
             $(".form-control").attr('readonly', 'readonly');
             $("#edit_profile").removeClass('d-none');
             $('#<%=UpdateButton.ClientID%>').addClass('d-none');
+            $('#<%=UploadImage.ClientID%>').removeClass('d-none');
             $('#cancel_edit').addClass('d-none');
         });
     </script>

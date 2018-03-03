@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EdubookASP
 {
@@ -28,42 +26,55 @@ namespace EdubookASP
         }
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
-            string firstName = InputFirstName.Text;
-            string lastName = InputLastName.Text;
-            string birthDate = InputDOB.Text;
-            string city = InputCity.Text;
-            string education = InputEducation.Text;
-            string institution = InputInstitution.Text;
-            string tags = InputFavTag.Text;
-            string about = InputAbout.Text;
-
-            Debug.WriteLine("Before Find The Update Data");
+            //Debug.WriteLine("Before Find The Update Data");
             var updateProfile = dbContext.Profiles.Single(p => p.User_UserId == userId);
-            updateProfile.FirstName = firstName;
-            updateProfile.LastName = lastName;
+            updateProfile.FirstName = InputFirstName.Text;
+            updateProfile.LastName = InputLastName.Text;
+            updateProfile.City = InputCity.Text;
+            updateProfile.Institution = InputInstitution.Text;
+            updateProfile.Education = InputEducation.Text;
             updateProfile.About = InputAbout.Text;
-            Debug.WriteLine("Before Writing Data");
+            updateProfile.FavTag = InputFavTag.Text;
+            //Debug.WriteLine("Before Writing Data");
             dbContext.SubmitChanges();
-            Debug.WriteLine("After Writing Data");
-            //Response.Redirect(Request.RawUrl);
+            //Debug.WriteLine("After Writing Data");
+            Response.Redirect(Request.RawUrl);
         }
 
         private void PopulateProfile(int userId)
         {
-            var profiles = from prof in dbContext.Profiles where prof.User_UserId == userId select prof;
+            var profile = dbContext.Profiles.Single(p => p.User_UserId == userId);
 
-            foreach (Profile profile in profiles)
+            InputFirstName.Text = profile.FirstName;
+            InputLastName.Text = profile.LastName;
+            InputDOB.Text = profile.BirthDate.ToString("dd-MM-yyyy");
+            InputCity.Text = profile.City;
+            InputEducation.Text = profile.Education;
+            InputInstitution.Text = profile.Institution;
+            InputFavTag.Text = profile.FavTag;
+            InputAbout.Text = profile.About;
+        }
+
+        protected void UploadImage_Click(object sender, EventArgs e)
+        {
+            var profile = dbContext.Profiles.Single(p => p.User_UserId == userId);
+            string memberImageUploadPath = "";
+            if (ProfileImageUpload.HasFile)
             {
-                InputFirstName.Text = profile.FirstName;
-                InputLastName.Text = profile.LastName;
-                InputDOB.Text = profile.BirthDate.ToString("dd-MM-yyyy");
-                InputCity.Text = profile.City;
-                InputEducation.Text = profile.Education;
-                InputInstitution.Text = profile.Institution;
-                InputFavTag.Text = profile.FavTag;
-                InputAbout.Text = profile.About;
+                string fileExtension = Path.GetExtension(ProfileImageUpload.PostedFile.FileName);
+                memberImageUploadPath = @"~/Uploads/" + Session["Username"].ToString() + fileExtension;
+                ProfileImageUpload.SaveAs(Server.MapPath(memberImageUploadPath));
             }
-
+            profile.PhotoUrl = memberImageUploadPath;
+            dbContext.SubmitChanges();
+            Response.Redirect(Request.RawUrl);
+        }
+        private void RemoveFileIfExists(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
         }
     }
 }
