@@ -37,7 +37,7 @@
                     <a href="~/Search" runat="server" class="nav-link">Search</a>
                 </li>
                 <li class="nav-item">
-                    <a href="~/Friends" runat="server" class="nav-link">Friends</a>
+                    <a href="~/FriendsPage" runat="server" class="nav-link">Friends</a>
                 </li>
                 <li class="nav-item">
                     <a href="~/ProfilePage" runat="server" class="nav-link">Profile</a>

@@ -125,7 +125,8 @@
       <DependentUpon>EdubookDataClasses.dbml</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <Content Include="Friends.aspx" />
+    <Content Include="FriendRequest.aspx" />
+    <Content Include="FriendsPage.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\logo.png" />
@@ -229,12 +230,19 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Friends.aspx.cs">
-      <DependentUpon>Friends.aspx</DependentUpon>
+    <Compile Include="FriendRequest.aspx.cs">
+      <DependentUpon>FriendRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Friends.aspx.designer.cs">
-      <DependentUpon>Friends.aspx</DependentUpon>
+    <Compile Include="FriendRequest.aspx.designer.cs">
+      <DependentUpon>FriendRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FriendsPage.aspx.cs">
+      <DependentUpon>FriendsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FriendsPage.aspx.designer.cs">
+      <DependentUpon>FriendsPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -20,11 +20,11 @@
         </div>
         <hr />
         <div class="m-1 row">
-            <label for="InputDOB" class="col-sm-3">Date of Birth</label>
+            <label for="LabelDOB" class="col-sm-3">Date of Birth</label>
             <asp:Label ID="LabelDOB" runat="server" Text="Date of Birth"></asp:Label>
         </div>
         <div class="m-1 row">
-            <label for="InputCity" class="col-sm-3">City</label>
+            <label for="LabelCity" class="col-sm-3">City</label>
             <asp:Label ID="LabelCity" runat="server" Text="About"></asp:Label>
         </div>
         <div class="m-1 row">
